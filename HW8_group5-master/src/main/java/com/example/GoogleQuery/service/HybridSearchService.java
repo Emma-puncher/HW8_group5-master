@@ -3,6 +3,8 @@ package com.example.GoogleQuery.service;
 import com.example.GoogleQuery.model.Cafe;
 import com.example.GoogleQuery.model.SearchResult;
 import com.example.GoogleQuery.model.WebPage;
+import com.example.GoogleQuery.service.KeywordService;
+import com.example.GoogleQuery.service.RankingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +27,12 @@ public class HybridSearchService {
     
     @Autowired
     private GoogleService googleService;
+
+    @Autowired
+    private RankingService rankingService;
+
+    @Autowired
+    private KeywordService keywordService;
     
     private static final int GOOGLE_RESULTS_LIMIT = 5;
     private static final double LOCAL_CAFE_SCORE_BOOST = 2.0;  // 本地咖啡廳加權
@@ -147,31 +155,33 @@ public class HybridSearchService {
         ArrayList<SearchResult> results = new ArrayList<>();
         
         try {
-            // 執行 Google 搜尋
-            HashMap<String, String> googleResults = googleService.search(keyword);
-            
-            if (googleResults == null || googleResults.isEmpty()) {
+            // 使用 GoogleService 抓取 Google 前 N 頁 (會建立 WebPage 並抓取文字內容)
+            ArrayList<WebPage> pages = googleService.searchAndCreatePages(keyword);
+
+            if (pages == null || pages.isEmpty()) {
                 System.out.println("[HybridSearch] Google 搜尋無結果");
                 return results;
             }
-            
-            // 轉換為 SearchResult
-            int score = 100;  // Google 結果初始分數
-            for (Map.Entry<String, String> entry : googleResults.entrySet()) {
-                String title = entry.getKey();
-                String url = entry.getValue();
-                
-                // 建立 WebPage
-                WebPage page = new WebPage(url, title, "");
-                
-                // 建立 SearchResult
-                SearchResult result = new SearchResult(page, score);
-                result.setSource("google");
-                result.setGoogleResult(true);
-                
-                results.add(result);
-                score--;  // 按順序遞減分數
+
+            // 過濾有效頁面
+            pages = googleService.filterValidWebPages(pages);
+
+            if (pages.isEmpty()) {
+                System.out.println("[HybridSearch] Google 搜尋取得頁面但無有效內容");
+                return results;
             }
+
+            // 使用 RankingService 與 KeywordService 依照我們預先設定的關鍵字與權重計算分數
+            List<String> allKeywords = keywordService.getAllKeywordsName();
+            ArrayList<SearchResult> ranked = rankingService.rankWebPages(pages, allKeywords);
+
+            // 標記來源並設為 Google 結果
+            for (SearchResult r : ranked) {
+                r.setSource("google");
+                r.setGoogleResult(true);
+            }
+
+            results.addAll(ranked);
             
         } catch (Exception e) {
             System.err.println("[HybridSearch] Google 搜尋失敗: " + e.getMessage());

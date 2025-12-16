@@ -1,0 +1,106 @@
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.5.6)
+
+2025-12-16T18:48:57.013+08:00  INFO 13855 --- [           main] c.e.GoogleQuery.GoogleQueryApplication   : Starting GoogleQueryApplication v0.0.1-SNAPSHOT using Java 21.0.8 with PID 13855 (/Users/zhengyujie/Downloads/HW8_group5-master/HW8_group5-master/target/bmi-0.0.1-SNAPSHOT.jar started by zhengyujie in /Users/zhengyujie/Downloads/HW8_group5-master/HW8_group5-master)
+2025-12-16T18:48:57.015+08:00  INFO 13855 --- [           main] c.e.GoogleQuery.GoogleQueryApplication   : No active profile set, falling back to 1 default profile: "default"
+2025-12-16T18:48:57.511+08:00  INFO 13855 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-12-16T18:48:57.516+08:00  INFO 13855 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-12-16T18:48:57.517+08:00  INFO 13855 --- [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.46]
+2025-12-16T18:48:57.527+08:00  INFO 13855 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-12-16T18:48:57.528+08:00  INFO 13855 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 496 ms
+正在載入關鍵字資料...
+成功載入 30 個關鍵字
+未找到翻譯檔案，使用預設設定
+KeywordService 初始化完成：
+  - Tier 1 關鍵字: 15
+  - Tier 2 關鍵字: 9
+  - Tier 3 關鍵字: 6
+  - 停用詞: 0
+RankingService 初始化完成：已載入 30 個 baseline scores
+SearchService 初始化完成：已載入 30 家咖啡廳
+CafeRepository 初始化完成：已載入 30 家咖啡廳
+FilterService 初始化完成：
+  - 可用地區: 12
+  - 可用功能: 12
+KeywordRepository 初始化完成：已載入 30 個關鍵字
+正在載入咖啡廳資料...
+成功載入 30 家咖啡廳
+正在載入基準分數...
+成功載入 30 個基準分數
+2025-12-16T18:48:57.694+08:00  INFO 13855 --- [           main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2025-12-16T18:48:57.870+08:00  INFO 13855 --- [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2025-12-16T18:48:57.909+08:00  INFO 13855 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-12-16T18:48:57.919+08:00  INFO 13855 --- [           main] c.e.GoogleQuery.GoogleQueryApplication   : Started GoogleQueryApplication in 1.064 seconds (process running for 1.281)
+2025-12-16T18:48:58.081+08:00  INFO 13855 --- [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-12-16T18:48:58.081+08:00  INFO 13855 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-12-16T18:48:58.082+08:00  INFO 13855 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+[去重] 新增: 潘寓 Pan's Haunt(安靜工作咖啡廳） -> key: id:cafe_029
+[去重] 新增: 2730café 貳柒參零咖啡 -> key: id:cafe_009
+[去重] 新增: 角公園咖啡 Triangle Garden Cafe -> key: id:cafe_010
+[去重] 新增: Block & Cafe. 町咖啡 -> key: id:cafe_011
+[去重] 新增: 未央咖啡店 -> key: id:cafe_022
+[去重] 新增: 黑露咖啡館 OLO Coffee Roasters -> key: id:cafe_023
+[去重] 新增: 小米酒咖啡館 -> key: id:cafe_026
+[去重] 新增: JOHN DOE CAFÉ 無名氏咖啡 -> key: id:cafe_012
+[去重] 新增: 早秋咖啡 Cafe Macho -> key: id:cafe_025
+[去重] 新增: Le Park Cafe公園咖啡館 -> key: id:cafe_013
+[去重] 新增: CBC SPACE 景美咖啡圖書館 Cafe Boven Co-working -> key: id:cafe_003
+[去重] 新增: 且自 手作與咖啡 -> key: id:cafe_007
+[去重] 新增: the quiet light 默光咖啡瑞安店 -> key: id:cafe_014
+[去重] 新增: 秘徑咖啡Alley’s Cafe -> key: id:cafe_016
+[去重] 新增: 羊毛與花 ‧ 永康 -> key: id:cafe_001
+[去重] 新增: Moooon River Cafe & Books -> key: id:cafe_002
+[去重] 新增: 北風社 -> key: id:cafe_004
+[去重] 新增: Joco latte -> key: id:cafe_005
+[去重] 新增: Homey's cafe -> key: id:cafe_008
+[去重] 新增: 巢 nido -> key: id:cafe_019
+[去重] 新增: 北風社 -> key: id:cafe_027
+[去重] 新增: dark corner cafe -> key: id:cafe_028
+[去重] 新增: 翌日咖啡店 -> key: id:cafe_018
+[去重] 新增: CAFE RACO -> key: id:cafe_006
+[去重] 新增: ALL DAY ROASTING COMPANY 民生店 -> key: id:cafe_017
+[去重] 新增: 浮光書店 (中山站/赤峰街) -> key: id:cafe_024
+[去重] 新增: Remember Me_記得我．café -> key: id:cafe_020
+[去重] 新增: CE' & LIB-RARY 遼寧店 -> key: id:cafe_030
+[去重] 新增: Sugar Man Cafe -> key: id:cafe_015
+[去重] 新增: Costumice Café -> key: id:cafe_021
+[HybridSearch] 本地搜尋完成: 找到 29 家咖啡廳
+[HybridSearch] Google 搜尋完成: 找到 5 個網頁結果
+[HybridSearch] 最終結果數: 34
+[去重] 新增: 潘寓 Pan's Haunt(安靜工作咖啡廳） -> key: id:cafe_029
+[去重] 新增: 羊毛與花 ‧ 永康 -> key: id:cafe_001
+[去重] 新增: Moooon River Cafe & Books -> key: id:cafe_002
+[去重] 新增: 北風社 -> key: id:cafe_004
+[去重] 新增: Joco latte -> key: id:cafe_005
+[去重] 新增: Homey's cafe -> key: id:cafe_008
+[去重] 新增: 2730café 貳柒參零咖啡 -> key: id:cafe_009
+[去重] 新增: 角公園咖啡 Triangle Garden Cafe -> key: id:cafe_010
+[去重] 新增: Block & Cafe. 町咖啡 -> key: id:cafe_011
+[去重] 新增: 巢 nido -> key: id:cafe_019
+[去重] 新增: 未央咖啡店 -> key: id:cafe_022
+[去重] 新增: 黑露咖啡館 OLO Coffee Roasters -> key: id:cafe_023
+[去重] 新增: 小米酒咖啡館 -> key: id:cafe_026
+[去重] 新增: 北風社 -> key: id:cafe_027
+[去重] 新增: dark corner cafe -> key: id:cafe_028
+[去重] 新增: CAFE RACO -> key: id:cafe_006
+[去重] 新增: JOHN DOE CAFÉ 無名氏咖啡 -> key: id:cafe_012
+[去重] 新增: 早秋咖啡 Cafe Macho -> key: id:cafe_025
+[去重] 新增: Le Park Cafe公園咖啡館 -> key: id:cafe_013
+[去重] 新增: ALL DAY ROASTING COMPANY 民生店 -> key: id:cafe_017
+[去重] 新增: 浮光書店 (中山站/赤峰街) -> key: id:cafe_024
+[去重] 新增: CBC SPACE 景美咖啡圖書館 Cafe Boven Co-working -> key: id:cafe_003
+[去重] 新增: 且自 手作與咖啡 -> key: id:cafe_007
+[去重] 新增: the quiet light 默光咖啡瑞安店 -> key: id:cafe_014
+[去重] 新增: Remember Me_記得我．café -> key: id:cafe_020
+[去重] 新增: CE' & LIB-RARY 遼寧店 -> key: id:cafe_030
+[去重] 新增: Sugar Man Cafe -> key: id:cafe_015
+[去重] 新增: 秘徑咖啡Alley’s Cafe -> key: id:cafe_016
+[去重] 新增: 翌日咖啡店 -> key: id:cafe_018
+[去重] 新增: Costumice Café -> key: id:cafe_021

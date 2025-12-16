@@ -27,27 +27,9 @@ public class RecommendationService {
      * @return 熱門推薦列表
      */
     public ArrayList<SearchResult> getTopRecommendations(int limit) {
-        // 獲取所有咖啡廳
-        List<Cafe> allCafes = searchService.getAllCafes();
-        
-        // 轉換為 SearchResult 並設定 baseline score
-        ArrayList<SearchResult> results = new ArrayList<>();
-        for (Cafe cafe : allCafes) {
-            SearchResult result = searchService.getCafeById(cafe.getId());
-            if (result != null) {
-                double baselineScore = rankingService.getBaselineScore(cafe.getId());
-                result.setScore(baselineScore);
-                results.add(result);
-            }
-        }
-        
-        // 依 baseline score 排序
-        results.sort((a, b) -> Double.compare(b.getScore(), a.getScore()));
-        
-        // 返回前 N 個
-        return results.stream()
-                .limit(limit)
-                .collect(Collectors.toCollection(ArrayList::new));
+        // Hot recommendations disabled per user request.
+        // Return an empty list so frontend will not show "熱門推薦" sections.
+        return new ArrayList<>();
     }
 
     /**
@@ -57,21 +39,8 @@ public class RecommendationService {
      * @return 該地區的推薦列表
      */
     public ArrayList<SearchResult> getRecommendationsByDistrict(String district, int limit) {
-        // 先搜尋該地區的咖啡廳
-        ArrayList<SearchResult> districtCafes = searchService.searchByDistrict(district);
-        
-        // 依 baseline score 設定分數
-        for (SearchResult cafe : districtCafes) {
-            double baselineScore = rankingService.getBaselineScore(cafe.getCafeId());
-            cafe.setScore(baselineScore);
-        }
-        
-        // 排序並返回
-        districtCafes.sort((a, b) -> Double.compare(b.getScore(), a.getScore()));
-        
-        return districtCafes.stream()
-                .limit(limit)
-                .collect(Collectors.toCollection(ArrayList::new));
+        // Recommendations disabled — return empty list.
+        return new ArrayList<>();
     }
 
     /**
@@ -81,21 +50,8 @@ public class RecommendationService {
      * @return 符合該特性的推薦列表
      */
     public ArrayList<SearchResult> getRecommendationsByFeature(String feature, int limit) {
-        // 搜尋有該功能的咖啡廳
-        ArrayList<SearchResult> featureCafes = searchService.searchByFeature(feature);
-        
-        // 設定 baseline score
-        for (SearchResult cafe : featureCafes) {
-            double baselineScore = rankingService.getBaselineScore(cafe.getCafeId());
-            cafe.setScore(baselineScore);
-        }
-        
-        // 排序並返回
-        featureCafes.sort((a, b) -> Double.compare(b.getScore(), a.getScore()));
-        
-        return featureCafes.stream()
-                .limit(limit)
-                .collect(Collectors.toCollection(ArrayList::new));
+        // Recommendations disabled — return empty list.
+        return new ArrayList<>();
     }
 
     /**
@@ -109,22 +65,8 @@ public class RecommendationService {
             List<String> districts,
             List<String> features,
             int limit) {
-        
-        // 使用進階搜尋（空關鍵字，只用篩選條件）
-        ArrayList<SearchResult> results = searchService.advancedSearch("", districts, features);
-        
-        // 設定 baseline score
-        for (SearchResult cafe : results) {
-            double baselineScore = rankingService.getBaselineScore(cafe.getCafeId());
-            cafe.setScore(baselineScore);
-        }
-        
-        // 排序並返回
-        results.sort((a, b) -> Double.compare(b.getScore(), a.getScore()));
-        
-        return results.stream()
-                .limit(limit)
-                .collect(Collectors.toCollection(ArrayList::new));
+        // Recommendations disabled — return empty list.
+        return new ArrayList<>();
     }
 
     /**

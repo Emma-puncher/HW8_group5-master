@@ -3,6 +3,9 @@ package com.example.GoogleQuery.service;
 import com.example.GoogleQuery.model.WebPage;
 import com.example.GoogleQuery.model.WebNode;
 import com.example.GoogleQuery.model.WebTree;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -18,6 +21,11 @@ import java.util.Map;
  */
 @Service
 public class GoogleService {
+    @Value("${google.cse.apiKey:}")
+    private String googleApiKey;
+
+    @Value("${google.cse.cx:}")
+    private String googleCx;
     
     /**
      * 執行 Google 搜尋
@@ -26,8 +34,59 @@ public class GoogleService {
      * @throws IOException
      */
     public HashMap<String, String> search(String keyword) throws IOException {
+        // If API key and CX configured, use Google Custom Search JSON API
+        if (googleApiKey != null && !googleApiKey.isEmpty() && googleCx != null && !googleCx.isEmpty()) {
+            return customSearch(keyword, 20);
+        }
+
+        // Fallback to HTML parsing if API not configured
         GoogleQuery googleQuery = new GoogleQuery(keyword);
         return googleQuery.getSearchResults();
+    }
+
+    /**
+     * Call Google Custom Search JSON API to fetch up to `limit` results (max 20 by paging).
+     */
+    private HashMap<String, String> customSearch(String keyword, int limit) throws IOException {
+        HashMap<String, String> results = new HashMap<>();
+        ObjectMapper mapper = new ObjectMapper();
+
+        int fetched = 0;
+        int start = 1;
+
+        while (fetched < limit) {
+            int num = Math.min(10, limit - fetched);
+            String q = java.net.URLEncoder.encode(keyword, "UTF-8");
+            String url = String.format(
+                "https://www.googleapis.com/customsearch/v1?key=%s&cx=%s&q=%s&num=%d&start=%d",
+                googleApiKey, googleCx, q, num, start
+            );
+
+            try (java.io.InputStream in = new java.net.URL(url).openStream()) {
+                JsonNode root = mapper.readTree(in);
+                JsonNode items = root.get("items");
+                if (items == null || !items.isArray()) break;
+
+                for (JsonNode item : items) {
+                    String title = item.has("title") ? item.get("title").asText() : "";
+                    String link = item.has("link") ? item.get("link").asText() : "";
+                    if (!title.isEmpty() && link.startsWith("http") && !results.containsKey(title)) {
+                        results.put(title, link);
+                        fetched++;
+                        if (fetched >= limit) break;
+                    }
+                }
+            } catch (Exception e) {
+                System.out.println("Custom Search API error: " + e.getMessage());
+                break;
+            }
+
+            // prepare next page
+            start += num;
+            if (start > 100) break; // Google's API limits start
+        }
+
+        return results;
     }
     
     /**
