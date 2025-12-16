@@ -1,0 +1,304 @@
+
+[
+  {
+    "id": "cafe_001",
+    "name": "羊毛與花 ‧ 永康",
+    "url": "https://mymarcy.tw/youmoutoohanacoffee/",
+    "district": "大安區",
+    "address": "臺北市大安區永康街37巷12號",
+    "keywords": "[\"不限時\",\"有插座\",\"有wifi\",\"安靜\"]",
+    "score": 4.4,
+    "phone": "02-2358-3153"
+  },
+  {
+    "id": "cafe_002",
+    "name": "Moooon River Cafe & Books",
+    "url": "https://tenjo.tw/moooonriver/",
+    "district": "內湖區",
+    "address": "臺北市內湖區瑞光路218號",
+    "keywords": "[\"不限時\",\"有插座\",\"有wifi\",\"安靜\"]",
+    "score": 4.3,
+    "phone": "02-7720-2070"
+  },
+  {
+    "id": "cafe_003",
+    "name": "CBC SPACE 景美咖啡圖書館 Cafe Boven Co-working",
+    "url": "https://travel.yam.com/article/132358",
+    "district": "文山區",
+    "address": "臺北市文山區景興路193號",
+    "keywords": "[\"有插座\",\"有wifi\",\"安靜\"]",
+    "score": 4.5,
+    "phone": "02-2931-0512"
+  },
+  {
+    "id": "cafe_004",
+    "name": "北風社",
+    "url": "https://maggieblog.tw/post-35786626/",
+    "district": "大同區",
+    "address": "臺北市大同區赤峰街47巷18號2樓",
+    "keywords": "[\"不限時\",\"有插座\",\"有wifi\",\"安靜\"]",
+    "score": 4.2,
+    "phone": "02-2559-4019"
+  },
+  {
+    "id": "cafe_005",
+    "name": "Joco latte",
+    "url": "https://whos-talking.com/2024/12/23/joco-latte/#google_vignette",
+    "district": "中山區",
+    "address": "臺北市中山區民生東路三段88巷4號",
+    "keywords": "[\"不限時\",\"有插座\",\"有wifi\",\"安靜\"]",
+    "score": 4,
+    "phone": "02-2501-8809"
+  },
+  {
+    "id": "cafe_006",
+    "name": "CAFE RACO",
+    "url": "https://pfse64289.pixnet.net/blog/posts/15336174211",
+    "district": "中山區",
+    "address": "臺北市中山區民生東路二段147巷1號號1樓",
+    "keywords": "[\"不限時\",\"有插座\",\"有wifi\"]",
+    "score": 4.5,
+    "phone": "02-2517-5310"
+  },
+  {
+    "id": "cafe_007",
+    "name": "且自 手作與咖啡",
+    "url": "https://www.popdaily.com.tw/forum/food/1514505",
+    "district": "中山區",
+    "address": "臺北市中山區八德路二段225號2樓",
+    "keywords": "[\"有插座\",\"有wifi\",\"安靜\"]",
+    "score": 4.9,
+    "phone": "0983-028500"
+  },
+  {
+    "id": "cafe_008",
+    "name": "Homey's cafe",
+    "url": "https://havefunday.com/taiwan-foods/taipei-foods-34/",
+    "district": "大安區",
+    "address": "臺北市大安區敦化南路一段236巷36號2樓",
+    "keywords": "[\"不限時\",\"有插座\",\"有wifi\",\"安靜\"]",
+    "score": 4.3,
+    "phone": "02-2711-1519"
+  },
+  {
+    "id": "cafe_009",
+    "name": "2730café 貳柒參零咖啡",
+    "url": "https://pipichocho.com/2730-cafe/",
+    "district": "大安區",
+    "address": "臺北市大安區延吉街288號",
+    "keywords": "[\"不限時\",\"有插座\",\"有wifi\",\"安靜\"]",
+    "score": 4.6,
+    "phone": "02-2708-8230"
+  },
+  {
+    "id": "cafe_010",
+    "name": "角公園咖啡 Triangle Garden Cafe",
+    "url": "https://chiaslife.com/taipei-trianglegarden-cafe/",
+    "district": "大同區",
+    "address": "臺北市大同區太原路131號2樓",
+    "keywords": "[\"不限時\",\"有插座\",\"有wifi\",\"安靜\"]",
+    "score": 4.4,
+    "phone": "02-2556-1773"
+  },
+  {
+    "id": "cafe_011",
+    "name": "Block & Cafe. 町咖啡",
+    "url": "https://beri.tw/block-cafe/#google_vignette",
+    "district": "大同區",
+    "address": "臺北市大同區太原路50號2樓",
+    "keywords": "[\"不限時\",\"有插座\",\"有wifi\",\"安靜\"]",
+    "score": 4.5,
+    "phone": "02-2558-8163"
+  },
+  {
+    "id": "cafe_012",
+    "name": "JOHN DOE CAFÉ 無名氏咖啡",
+    "url": "https://mymarcy.tw/john-doe-cafe/",
+    "district": "文山區",
+    "address": "臺北市文山區羅斯福路五段225號",
+    "keywords": "[\"不限時\",\"有插座\",\"有wifi\"]",
+    "score": 4.6,
+    "phone": "02-2933-6566"
+  },
+  {
+    "id": "cafe_013",
+    "name": "Le Park Cafe公園咖啡館",
+    "url": "https://mymarcy.tw/le-park-cafe/",
+    "district": "中山區",
+    "address": "臺北市中山區遼寧街146號",
+    "keywords": "[\"不限時\",\"有wifi\",\"安靜\"]",
+    "score": 4.5,
+    "phone": "02-2719-8880"
+  },
+  {
+    "id": "cafe_014",
+    "name": "the quiet light 默光咖啡瑞安店",
+    "url": "https://beri.tw/the-quiet-light/",
+    "district": "大安區",
+    "address": "臺北市大安區瑞安街111號",
+    "keywords": "[\"有插座\",\"有wifi\",\"安靜\"]",
+    "score": 4.7,
+    "phone": "02-2701-2091"
+  },
+  {
+    "id": "cafe_015",
+    "name": "Sugar Man Cafe",
+    "url": "https://mymarcy.tw/sugar-man-cafe/",
+    "district": "大安區",
+    "address": "臺北市大安區和平東路一段87-1號",
+    "keywords": "[\"不限時\",\"有wifi\"]",
+    "score": 3.7,
+    "phone": "02-2396-9980"
+  },
+  {
+    "id": "cafe_016",
+    "name": "秘徑咖啡Alley’s Cafe",
+    "url": "https://cinnachic.com/alleys-cafe/",
+    "district": "文山區",
+    "address": "臺北市文山區羅斯福路五段218巷9弄3號",
+    "keywords": "[\"不限時\",\"有插座\"]",
+    "score": 4.8,
+    "phone": "02-8663-1525"
+  },
+  {
+    "id": "cafe_017",
+    "name": "ALL DAY ROASTING COMPANY 民生店",
+    "url": "https://elisa48.pixnet.net/blog/posts/4045241136",
+    "district": "松山區",
+    "address": "臺北市松山區延壽街329號1樓",
+    "keywords": "[\"不限時\",\"有插座\",\"安靜\"]",
+    "score": 4.4,
+    "phone": "02-8787-4468"
+  },
+  {
+    "id": "cafe_018",
+    "name": "翌日咖啡店",
+    "url": "https://catcha-cafes.com/blog/yokujitsucafe/",
+    "district": "大安區",
+    "address": "臺北市大安區潮州街176號",
+    "keywords": "[\"有插座\",\"安靜\"]",
+    "score": 4.6,
+    "phone": ""
+  },
+  {
+    "id": "cafe_019",
+    "name": "巢 nido",
+    "url": "https://elisa48.pixnet.net/blog/posts/4045451088",
+    "district": "信義區",
+    "address": "臺北市信義區忠孝東路五段183號2樓",
+    "keywords": "[\"不限時\",\"有插座\",\"有wifi\",\"安靜\"]",
+    "score": 4.1,
+    "phone": "02-2753-4402"
+  },
+  {
+    "id": "cafe_020",
+    "name": "Remember Me_記得我．café",
+    "url": "https://beri.tw/remember-me-cafe/",
+    "district": "松山區",
+    "address": "臺北市松山區南京東路四段133巷4弄16號",
+    "keywords": "[\"有插座\",\"有wifi\",\"安靜\"]",
+    "score": 4.5,
+    "phone": "02-2547-1517"
+  },
+  {
+    "id": "cafe_021",
+    "name": "Costumice Café",
+    "url": "https://beri.tw/costumice-cafe/",
+    "district": "大安區",
+    "address": "臺北市大安區忠孝東路四段223巷71弄6號1樓",
+    "keywords": "[\"有插座\",\"安靜\"]",
+    "score": 4.1,
+    "phone": ""
+  },
+  {
+    "id": "cafe_022",
+    "name": "未央咖啡店",
+    "url": "https://elisa48.pixnet.net/blog/posts/4045241140",
+    "district": "大安區",
+    "address": "臺北市大安區四維路208巷10號",
+    "keywords": "[\"不限時\",\"有插座\",\"有wifi\",\"安靜\"]",
+    "score": 4.1,
+    "phone": "02-2703-2331"
+  },
+  {
+    "id": "cafe_023",
+    "name": "黑露咖啡館 OLO Coffee Roasters",
+    "url": "https://mymarcy.tw/olo-coffee-roasters/",
+    "district": "大同區",
+    "address": "臺北市大同區南京西路18巷26之2號",
+    "keywords": "[\"不限時\",\"有插座\",\"有wifi\",\"安靜\"]",
+    "score": 4.6,
+    "phone": ""
+  },
+  {
+    "id": "cafe_024",
+    "name": "浮光書店 (中山站/赤峰街)",
+    "url": "https://mymarcy.tw/illuminationbooks/",
+    "district": "大同區",
+    "address": "臺北市大同區赤峰街47巷16號2樓",
+    "keywords": "[\"不限時\",\"有wifi\",\"安靜\"]",
+    "score": 4.5,
+    "phone": "02-2550-7288"
+  },
+  {
+    "id": "cafe_025",
+    "name": "早秋咖啡 Cafe Macho",
+    "url": "https://mymarcy.tw/cafe-macho/",
+    "district": "中正區",
+    "address": "臺北市中正區晉江街10號",
+    "keywords": "[\"不限時\",\"有插座\",\"有wifi\"]",
+    "score": 4.3,
+    "phone": "02-2368-5029"
+  },
+  {
+    "id": "cafe_026",
+    "name": "小米酒咖啡館",
+    "url": "https://whos-talking.com/2024/10/31/cafexiaomijo/",
+    "district": "大安區",
+    "address": "臺北市大安區和平東路三段308巷37號號1樓",
+    "keywords": "[\"不限時\",\"有插座\",\"有wifi\",\"安靜\"]",
+    "score": 4.5,
+    "phone": "02-2395-7617"
+  },
+  {
+    "id": "cafe_027",
+    "name": "北風社",
+    "url": "https://catcha-cafes.com/blog/beifongshe-cafe/",
+    "district": "大同區",
+    "address": "臺北市大同區赤峰街47巷18號2樓",
+    "keywords": "[\"不限時\",\"有插座\",\"有wifi\",\"安靜\"]",
+    "score": 4.2,
+    "phone": "02-2559-4019"
+  },
+  {
+    "id": "cafe_028",
+    "name": "dark corner cafe",
+    "url": "https://www.verse.com.tw/article/dark-corner-coffee-midnight-cafe",
+    "district": "萬華區",
+    "address": "臺北市萬華區漢口街二段90巷8弄3號二樓",
+    "keywords": "[\"不限時\",\"有插座\",\"有wifi\",\"安靜\"]",
+    "score": 4.1,
+    "phone": "0908-375-113"
+  },
+  {
+    "id": "cafe_029",
+    "name": "潘寓 Pan's Haunt(安靜工作咖啡廳）",
+    "url": "https://coffeeshop-library.com/pans-haunt/",
+    "district": "大安區",
+    "address": "臺北市大安區瑞安街133號",
+    "keywords": "[\"不限時\",\"有插座\",\"有wifi\",\"安靜\"]",
+    "score": 4.5,
+    "phone": ""
+  },
+  {
+    "id": "cafe_030",
+    "name": "CE' & LIB-RARY 遼寧店",
+    "url": "https://tripo.wingzero.tw/zh-TW/article/123",
+    "district": "中山區",
+    "address": "臺北市中山區遼寧街134號",
+    "keywords": "[\"有插座\",\"有wifi\",\"安靜\"]",
+    "score": 4,
+    "phone": "02-2712-2055"
+  }
+]
+

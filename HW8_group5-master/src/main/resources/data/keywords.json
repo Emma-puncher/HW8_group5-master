@@ -1,0 +1,190 @@
+{
+  "meta_info": {
+    "description": "咖啡廳讀書/工作適性評分關鍵字庫",
+    "version": "1.0",
+    "last_updated": "2025-12-14"
+  },
+  "keywords": [
+    {
+      "term": "不限時",
+      "category": "core",
+      "weight": 3.0,
+      "note": "最核心需求"
+    },
+    {
+      "term": "插座",
+      "category": "core",
+      "weight": 2.8,
+      "note": "工作讀書必備"
+    },
+    {
+      "term": "WIFI",
+      "category": "core",
+      "weight": 2.8,
+      "note": "網路連接"
+    },
+    {
+      "term": "安靜",
+      "category": "core",
+      "weight": 2.5,
+      "note": "環境音量"
+    },
+    {
+      "term": "讀書",
+      "category": "core",
+      "weight": 2.4,
+      "note": "使用者意圖"
+    },
+    {
+      "term": "工作",
+      "category": "core",
+      "weight": 2.4,
+      "note": "使用者意圖"
+    },
+    {
+      "term": "筆電",
+      "category": "core",
+      "weight": 2.3,
+      "note": "設備相關"
+    },
+    {
+      "term": "辦公",
+      "category": "core",
+      "weight": 2.2,
+      "note": "商務需求"
+    },
+    {
+      "term": "久坐",
+      "category": "core",
+      "weight": 2.1,
+      "note": "時間需求"
+    },
+    {
+      "term": "充電",
+      "category": "core",
+      "weight": 2.1,
+      "note": "電力需求"
+    },
+    {
+      "term": "無線網路",
+      "category": "core",
+      "weight": 2.0,
+      "note": "WIFI同義詞"
+    },
+    {
+      "term": "安靜空間",
+      "category": "core",
+      "weight": 2.0,
+      "note": "環境描述"
+    },
+    {
+      "term": "唸書",
+      "category": "core",
+      "weight": 2.0,
+      "note": "讀書同義詞"
+    },
+    {
+      "term": "會議",
+      "category": "core",
+      "weight": 2.0,
+      "note": "工作相關"
+    },
+    {
+      "term": "免費網路",
+      "category": "core",
+      "weight": 2.0,
+      "note": "成本與網路"
+    },
+    {
+      "term": "寬敞",
+      "category": "secondary",
+      "weight": 1.8,
+      "note": "舒適度"
+    },
+    {
+      "term": "舒適",
+      "category": "secondary",
+      "weight": 1.7,
+      "note": "整體感受"
+    },
+    {
+      "term": "明亮",
+      "category": "secondary",
+      "weight": 1.6,
+      "note": "燈光適合閱讀"
+    },
+    {
+      "term": "深夜",
+      "category": "secondary",
+      "weight": 1.5,
+      "note": "營業時間"
+    },
+    {
+      "term": "開很晚",
+      "category": "secondary",
+      "weight": 1.4,
+      "note": "營業時間口語"
+    },
+    {
+      "term": "好喝",
+      "category": "secondary",
+      "weight": 1.3,
+      "note": "餐飲品質"
+    },
+    {
+      "term": "甜點",
+      "category": "secondary",
+      "weight": 1.2,
+      "note": "附屬餐飲"
+    },
+    {
+      "term": "訂位",
+      "category": "secondary",
+      "weight": 1.1,
+      "note": "便利性"
+    },
+    {
+      "term": "低消",
+      "category": "secondary",
+      "weight": 1.0,
+      "note": "成本門檻"
+    },
+    {
+      "term": "平價",
+      "category": "reference",
+      "weight": 0.9,
+      "note": "價格參考"
+    },
+    {
+      "term": "菜單",
+      "category": "reference",
+      "weight": 0.8,
+      "note": "資訊完整度"
+    },
+    {
+      "term": "捷運",
+      "category": "reference",
+      "weight": 0.7,
+      "note": "交通位置"
+    },
+    {
+      "term": "氣氛",
+      "category": "reference",
+      "weight": 0.6,
+      "note": "主觀感受"
+    },
+    {
+      "term": "打卡",
+      "category": "reference",
+      "weight": 0.5,
+      "note": "社群屬性"
+    },
+    {
+      "term": "景觀",
+      "category": "reference",
+      "weight": 0.5,
+      "note": "視覺享受"
+    }
+  ]
+}
+

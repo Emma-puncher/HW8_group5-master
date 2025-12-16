@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>收藏清單 - Wenshan Coffee</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/components.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="logo">收藏清單</h1>
+      <nav>
+        <a href="index.html" class="nav-link">搜尋頁 🔎</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section>
+      <h2>你的收藏</h2>
+      <div id="fav-results" class="results"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">LocalStorage 收藏 (無帳號)</div>
+  </footer>
+
+<script src="js/utils.js"></script>
+<script src="js/favorite.js"></script>
+<script>
+  // render favorites on load
+  document.addEventListener('DOMContentLoaded', ()=>{
+    const wrapper = document.getElementById('fav-results');
+    const favs = getFavorites();
+    if (!favs.length) {
+      wrapper.innerHTML = '<p>目前沒有收藏。回到 <a href="index.html">搜尋頁</a> 加入你喜歡的咖啡廳。</p>';
+    } else {
+      favs.forEach(item => wrapper.appendChild(createResultCard(item, true)));
+    }
+  });
+</script>
+</body>
+</html>

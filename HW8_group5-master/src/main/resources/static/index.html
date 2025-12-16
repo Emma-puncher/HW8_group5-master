@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>台北咖啡廳搜尋引擎</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <h1 class="logo">
+                    <i class="fas fa-coffee"></i>
+                    台北咖啡廳搜尋
+                </h1>
+                <nav class="nav">
+                    <button class="nav-btn" id="favoritesBtn">
+                        <i class="fas fa-heart"></i>
+                        <span>收藏清單</span>
+                        <span class="badge" id="favCount">0</span>
+                    </button>
+                    <button class="nav-btn" id="historyBtn">
+                        <i class="fas fa-history"></i>
+                        <span>瀏覽紀錄</span>
+                    </button>
+                    <button class="nav-btn" id="reportBtn">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span>回報資訊有誤</span>
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Search Section -->
+            <section class="search-section">
+                <div class="search-box">
+                    <div class="search-input-wrapper">
+                        <i class="fas fa-search search-icon"></i>
+                        <input 
+                            type="text" 
+                            id="searchInput" 
+                            class="search-input" 
+                            placeholder="搜尋適合讀書工作的咖啡廳..."
+                            autocomplete="off"
+                        >
+                        <button id="clearSearch" class="clear-btn" style="display: none;">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <button id="searchBtn" class="search-btn">搜尋</button>
+                </div>
+
+                <!-- Filter Section -->
+                <div class="filter-section">
+                    <div class="filter-group">
+                        <label for="districtFilter">
+                            <i class="fas fa-map-marker-alt"></i>
+                            行政區篩選
+                        </label>
+                        <select id="districtFilter" class="filter-select">
+                            <option value="">全部地區</option>
+                            <option value="中正區">中正區</option>
+                            <option value="大同區">大同區</option>
+                            <option value="中山區">中山區</option>
+                            <option value="松山區">松山區</option>
+                            <option value="大安區">大安區</option>
+                            <option value="萬華區">萬華區</option>
+                            <option value="信義區">信義區</option>
+                            <option value="士林區">士林區</option>
+                            <option value="北投區">北投區</option>
+                            <option value="內湖區">內湖區</option>
+                            <option value="南港區">南港區</option>
+                            <option value="文山區">文山區</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label>
+                            <i class="fas fa-filter"></i>
+                            功能篩選
+                        </label>
+                        <div class="feature-filters">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="feature" value="不限時">
+                                <span>不限時</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="feature" value="有插座">
+                                <span>有插座</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="feature" value="安靜">
+                                <span>安靜</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="feature" value="有wifi">
+                                <span>有 WiFi</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Loading Indicator -->
+            <div id="loadingIndicator" class="loading" style="display: none;">
+                <div class="spinner"></div>
+                <p>搜尋中...</p>
+            </div>
+
+            <!-- Search Results -->
+            <section class="results-section" id="resultsSection" style="display: none;">
+                <div class="results-header">
+                    <h2 id="resultsTitle">搜尋結果</h2>
+                </div>
+                <div id="resultsContainer" class="results-container">
+                    <!-- Results will be inserted here -->
+                </div>
+            </section>
+
+            <!-- Hot Recommendations -->
+            <section class="recommendations-section" id="recommendationsSection">
+                <h2 class="section-title">
+                    <i class="fas fa-fire"></i>
+                    熱門推薦咖啡廳
+                </h2>
+                <div id="recommendationsContainer" class="results-container">
+                    <!-- Recommendations will be inserted here -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Favorites Modal -->
+    <div id="favoritesModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>
+                    <i class="fas fa-heart"></i>
+                    我的收藏
+                </h2>
+                <button class="close-btn" id="closeFavoritesModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="favoritesContent">
+                <!-- Favorites will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- History Modal -->
+    <div id="historyModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>
+                    <i class="fas fa-history"></i>
+                    瀏覽紀錄
+                </h2>
+                <button class="close-btn" id="closeHistoryModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="historyContent">
+                <!-- History will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Comparison Modal -->
+    <div id="comparisonModal" class="modal">
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h2>
+                    <i class="fas fa-balance-scale"></i>
+                    咖啡廳比較
+                </h2>
+                <button class="close-btn" id="closeComparisonModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="comparisonContent">
+                <!-- Comparison will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Error Report Modal -->
+    <div id="reportModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>
+                    <i class="fas fa-exclamation-triangle"></i>
+                    回報資訊有誤
+                </h2>
+                <button class="close-btn" id="closeReportModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                    如果您發現咖啡廳的資訊有誤（例如:是否限時、是否有插座等），請告訴我們，我們會盡快更正。
+                </p>
+                <form id="reportForm">
+                    <div class="form-group">
+                        <label for="reportCafe">咖啡廳名稱 <span style="color: var(--danger);">*</span></label>
+                        <input 
+                            type="text" 
+                            id="reportCafe" 
+                            class="form-input" 
+                            placeholder="請輸入咖啡廳名稱"
+                            required
+                        >
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="reportType">錯誤類型 <span style="color: var(--danger);">*</span></label>
+                        <select id="reportType" class="form-select" required>
+                            <option value="">請選擇錯誤類型</option>
+                            <option value="限時資訊">限時資訊錯誤</option>
+                            <option value="插座資訊">插座資訊錯誤</option>
+                            <option value="wifi資訊">WiFi 資訊錯誤</option>
+                            <option value="安靜程度">安靜程度錯誤</option>
+                            <option value="地址">地址錯誤</option>
+                            <option value="電話">電話錯誤</option>
+                            <option value="營業時間">營業時間錯誤</option>
+                            <option value="已停業">咖啡廳已停業</option>
+                            <option value="其他">其他</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="reportDetails">詳細說明 <span style="color: var(--danger);">*</span></label>
+                        <textarea 
+                            id="reportDetails" 
+                            class="form-textarea" 
+                            rows="4" 
+                            placeholder="請詳細描述錯誤的資訊內容..."
+                            required
+                        ></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="reportEmail">您的 Email（選填）</label>
+                        <input 
+                            type="email" 
+                            id="reportEmail" 
+                            class="form-input" 
+                            placeholder="如需回覆請留下 Email"
+                        >
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" id="cancelReport">取消</button>
+                        <button type="submit" class="btn-primary">送出回報</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Scripts -->
+    <script src="js/utils.js?v=20251215v2"></script>
+    <script src="js/favorite.js?v=20251215v3"></script>
+    <script src="js/history.js?v=20251215v4"></script>
+    <script src="js/filter.js?v=20251215v2"></script>
+    <script src="js/comparison.js?v=20251215v2"></script>
+    <script src="js/report.js?v=20251215v2"></script>
+    <script src="js/search.js?v=20251215v3"></script>
+    <script src="js/app.js?v=20251215v2"></script>
+</body>
+</html>
