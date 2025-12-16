@@ -2,6 +2,7 @@ package com.example.GoogleQuery.controller;
 
 import com.example.GoogleQuery.model.SearchResult;
 import com.example.GoogleQuery.service.SearchService;
+import com.example.GoogleQuery.service.HybridSearchService;
 import com.example.GoogleQuery.service.RecommendationService;
 import com.example.GoogleQuery.service.RelevanceValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,9 @@ public class SearchController {
 
     @Autowired
     private SearchService searchService;
+
+    @Autowired
+    private HybridSearchService hybridSearchService;
     
     @Autowired
     private RecommendationService recommendationService;
@@ -41,7 +45,8 @@ public class SearchController {
      */
     @GetMapping("/search")
     public ResponseEntity<Map<String, Object>> search(@RequestParam(value = "q", required = false) String q,
-                                                       @RequestParam(value = "keyword", required = false) String keyword) {
+                                                       @RequestParam(value = "keyword", required = false) String keyword,
+                                                       @RequestParam(value = "google", required = false, defaultValue = "false") boolean google) {
         try {
             // 支援前端的 q 參數和 keyword 參數（向後兼容）
             String searchKeyword = (q != null) ? q : keyword;
@@ -70,9 +75,14 @@ public class SearchController {
                 response.put("total", 0);
                 return ResponseEntity.ok(response);
             }
-            
-            // 呼叫 SearchService 進行搜尋
-            ArrayList<SearchResult> results = searchService.search(searchKeyword);
+
+            // 呼叫搜尋服務：若前端要求 Google 結果則使用僅 Google 的搜尋路徑
+            ArrayList<SearchResult> results;
+            if (google) {
+                results = hybridSearchService.googleSearchOnly(searchKeyword);
+            } else {
+                results = searchService.search(searchKeyword);
+            }
             
             response.put("total", results.size());
             response.put("results", results);

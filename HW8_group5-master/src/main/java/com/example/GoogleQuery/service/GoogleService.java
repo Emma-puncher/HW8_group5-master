@@ -36,7 +36,9 @@ public class GoogleService {
     public HashMap<String, String> search(String keyword) throws IOException {
         // If API key and CX configured, use Google Custom Search JSON API
         if (googleApiKey != null && !googleApiKey.isEmpty() && googleCx != null && !googleCx.isEmpty()) {
-            return customSearch(keyword, 20);
+            HashMap<String, String> res = customSearch(keyword, 20);
+            System.out.println("[GoogleService] customSearch returned count=" + (res == null ? 0 : res.size()));
+            return res;
         }
 
         // Fallback to HTML parsing if API not configured
@@ -64,6 +66,18 @@ public class GoogleService {
 
             try (java.io.InputStream in = new java.net.URL(url).openStream()) {
                 JsonNode root = mapper.readTree(in);
+                // Diagnostic: log a trimmed version of the raw JSON response to help debugging
+                try {
+                    String raw = root.toString();
+                    int max = Math.min(3000, raw.length());
+                    System.out.println("[GoogleService] raw customsearch response (trimmed): " + raw.substring(0, max));
+                } catch (Exception _e) {
+                    // ignore logging failures
+                }
+                // log search info if present
+                if (root.has("searchInformation") && root.get("searchInformation").has("totalResults")) {
+                    System.out.println("[GoogleService] searchInformation.totalResults=" + root.get("searchInformation").get("totalResults").asText());
+                }
                 JsonNode items = root.get("items");
                 if (items == null || !items.isArray()) break;
 
@@ -86,8 +100,24 @@ public class GoogleService {
             if (start > 100) break; // Google's API limits start
         }
 
+        // If Custom Search returned no results, fallback to HTML scraping of Google search page
+        if (results.isEmpty()) {
+            System.out.println("[GoogleService] customSearch returned no items, trying HTML fallback");
+            try {
+                GoogleQuery googleQuery = new GoogleQuery(keyword);
+                HashMap<String, String> fallback = googleQuery.getSearchResults();
+                System.out.println("[GoogleService] HTML fallback returned count=" + (fallback == null ? 0 : fallback.size()));
+                if (fallback != null && !fallback.isEmpty()) {
+                    return fallback;
+                }
+            } catch (Exception ex) {
+                System.out.println("Custom Search fallback error: " + ex.getMessage());
+            }
+        }
+
         return results;
     }
+
     
     /**
      * 搜尋並建立 WebPage 物件列表
@@ -271,7 +301,7 @@ public class GoogleService {
         return webPage != null 
             && webPage.getContent() != null 
             && !webPage.getContent().isEmpty()
-            && webPage.getContent().length() > 100; // 至少 100 字元
+            && webPage.getContent().length() > 50; // 至少 50 字元（調低門檻以便調試）
     }
     
     /**

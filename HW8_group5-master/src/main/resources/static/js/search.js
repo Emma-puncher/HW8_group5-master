@@ -25,8 +25,8 @@ class SearchManager {
                     data = await window.utils.apiRequest(`/search/advanced?${params}`);
                 } else if (query) {
                     // 使用基礎搜尋 API（需要關鍵字）
-                    const params = new URLSearchParams({ q: query });
-                    console.log('🔍 Calling basic search API:', params.toString());
+                    const params = new URLSearchParams({ q: query, google: 'true' });
+                    console.log('🔍 Calling basic search API (with Google):', params.toString());
                     data = await window.utils.apiRequest(`/search?${params}`);
                 } else {
                     // 沒有關鍵字也沒有篩選，回傳空結果
@@ -39,9 +39,15 @@ class SearchManager {
                 console.log(`✅ Found ${this.currentResults.length} results from backend API`);
                 console.log('🔍 第一筆資料的 ID:', this.currentResults[0]?.id, '完整資料:', this.currentResults[0]);
             } catch (apiError) {
-                // 如果 API 失敗,使用 Mock Data
-                console.log('⚠️ Backend API not available, using mock data');
-                this.currentResults = await window.mockDataLoader.searchCafes(query, filterParams);
+                // 如果 API 失敗,嘗試使用 Mock Data（若有），否則回傳空陣列
+                console.error('⚠️ Backend API error:', apiError);
+                if (window.mockDataLoader && typeof window.mockDataLoader.searchCafes === 'function') {
+                    console.log('⚠️ Using mock data loader for search results');
+                    this.currentResults = await window.mockDataLoader.searchCafes(query, filterParams);
+                } else {
+                    console.log('⚠️ No mockDataLoader available — returning empty results');
+                    this.currentResults = [];
+                }
             }
             
             this.currentQuery = query;
@@ -71,9 +77,15 @@ class SearchManager {
                 console.log(`✅ Found ${data.recommendations?.length || 0} recommendations from backend API`);
                 return data.recommendations || [];
             } catch (apiError) {
-                // 如果 API 失敗,使用 Mock Data
-                console.log('⚠️ Backend API not available, using mock data for recommendations');
-                return await window.mockDataLoader.getRecommendations(filterParams);
+                // 如果 API 失敗,嘗試使用 Mock Data（若有），否則回傳空陣列
+                console.error('⚠️ Recommendations API error:', apiError);
+                if (window.mockDataLoader && typeof window.mockDataLoader.getRecommendations === 'function') {
+                    console.log('⚠️ Using mock data loader for recommendations');
+                    return await window.mockDataLoader.getRecommendations(filterParams);
+                } else {
+                    console.log('⚠️ No mockDataLoader available — returning empty recommendations');
+                    return [];
+                }
             }
         } catch (error) {
             console.error('Load recommendations failed:', error);
@@ -140,8 +152,28 @@ function renderSearchResults(results, query = '') {
     // 更新標題
     resultsTitle.textContent = `搜尋結果 (${results.length} 間咖啡廳)`;
 
-    // 渲染結果卡片
-    resultsContainer.innerHTML = results.map(cafe => 
+    // 如果有來自 Google 的網頁結果，將其轉換為 cafe-like 物件以便通用渲染
+    const displayItems = results.map((item, idx) => {
+        const isGoogle = item.googleResult || item.source === 'google';
+        if (isGoogle) {
+            return {
+                id: item.id || (`google_` + idx),
+                name: item.name || (item.page && item.page.name) || item.title || '網頁結果',
+                preview: (item.page && item.page.content) || item.preview || item.description || '',
+                url: item.url || (item.page && item.page.url) || '#',
+                score: item.recommendationScore || item.score || 0,
+                features: item.features || [],
+                address: item.address || '',
+                hashtags: item.hashtags || []
+            };
+        }
+
+        // 已經是 cafe 物件，直接回傳
+        return item;
+    });
+
+    // 渲染結果卡片（包含本地咖啡廳與 Google 網頁）
+    resultsContainer.innerHTML = displayItems.map(cafe => 
         window.utils.createCafeCard(cafe, {
             showCheckbox: true,
             showFavorite: true,

@@ -32,7 +32,12 @@ public class GoogleQuery {
      */
     public GoogleQuery(String searchKeyword) {
         this.searchKeyword = searchKeyword;
-        this.url = "https://www.google.com/search?q=" + searchKeyword + "&oe=utf8&num=20";
+        try {
+            String q = java.net.URLEncoder.encode(searchKeyword, "UTF-8");
+            this.url = "https://www.google.com/search?q=" + q + "&oe=utf8&num=20";
+        } catch (Exception e) {
+            this.url = "https://www.google.com/search?q=" + searchKeyword + "&oe=utf8&num=20";
+        }
     }
     
     /**
@@ -74,9 +79,17 @@ public class GoogleQuery {
         
         try {
             Document doc = Jsoup.parse(content);
+            // Diagnostic: if the Google results page returns no standard results, dump a small snippet
+            try {
+                String snippet = content == null ? "" : content.length() > 2000 ? content.substring(0, 2000) : content;
+                System.out.println("[GoogleQuery] parsed HTML snippet: " + snippet.replaceAll("\\n", " ").replaceAll("\\r", " "));
+            } catch (Exception _e) {
+                // ignore
+            }
             
             // 找出所有搜尋結果的 <a> 標籤
             Elements lis = doc.select("div.kCrYT > a");
+            System.out.println("[GoogleQuery] found candidate anchors count=" + lis.size());
             
             for (Element li : lis) {
                 try {

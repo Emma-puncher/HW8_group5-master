@@ -34,7 +34,7 @@ public class HybridSearchService {
     @Autowired
     private KeywordService keywordService;
     
-    private static final int GOOGLE_RESULTS_LIMIT = 5;
+    private static final int GOOGLE_RESULTS_LIMIT = 20;
     private static final double LOCAL_CAFE_SCORE_BOOST = 2.0;  // 本地咖啡廳加權
     
     /**
@@ -156,17 +156,35 @@ public class HybridSearchService {
         
         try {
             // 使用 GoogleService 抓取 Google 前 N 頁 (會建立 WebPage 並抓取文字內容)
-            ArrayList<WebPage> pages = googleService.searchAndCreatePages(keyword);
+            // 如果使用者沒有指定和咖啡廳相關的詞，補上關鍵詞以聚焦到咖啡廳相關頁面
+            String googleQuery = keyword == null ? "" : keyword.trim();
+            String lower = googleQuery.toLowerCase();
+            if (!lower.contains("咖啡") && !lower.contains("咖啡廳") && !lower.contains("coffee") && !lower.contains("cafe")) {
+                googleQuery = googleQuery + " 咖啡廳";
+            }
 
-            if (pages == null || pages.isEmpty()) {
-                System.out.println("[HybridSearch] Google 搜尋無結果");
+            ArrayList<WebPage> pages = googleService.searchAndCreatePages(googleQuery);
+
+            if (pages == null) {
+                System.out.println("[HybridSearch] Google searchAndCreatePages returned null");
                 return results;
+            }
+
+            System.out.println("[HybridSearch] Google raw pages count: " + pages.size());
+            // log sample urls and content lengths
+            for (int i = 0; i < Math.min(5, pages.size()); i++) {
+                WebPage p = pages.get(i);
+                String url = p.getUrl();
+                int len = p.getContent() == null ? 0 : p.getContent().length();
+                System.out.println("[HybridSearch] sample page[" + i + "] url=" + url + " contentLen=" + len);
             }
 
             // 過濾有效頁面
             pages = googleService.filterValidWebPages(pages);
 
-            if (pages.isEmpty()) {
+            System.out.println("[HybridSearch] after filterValidWebPages count: " + (pages == null ? 0 : pages.size()));
+
+            if (pages == null || pages.isEmpty()) {
                 System.out.println("[HybridSearch] Google 搜尋取得頁面但無有效內容");
                 return results;
             }
@@ -187,6 +205,65 @@ public class HybridSearchService {
             System.err.println("[HybridSearch] Google 搜尋失敗: " + e.getMessage());
         }
         
+        return results;
+    }
+
+    /**
+     * 僅使用 Google 搜尋並回傳已排序的 SearchResult 列表（不包含本地咖啡廳）
+     *
+     * @param keyword 搜尋關鍵字
+     * @return Google 搜尋結果（已排序）
+     */
+    public ArrayList<SearchResult> googleSearchOnly(String keyword) {
+        ArrayList<SearchResult> results = new ArrayList<>();
+
+        try {
+            // If query lacks cafe-related terms, append a focus term to improve relevance
+            String googleQuery = keyword == null ? "" : keyword.trim();
+            String lower = googleQuery.toLowerCase();
+            if (!lower.contains("咖啡") && !lower.contains("咖啡廳") && !lower.contains("coffee") && !lower.contains("cafe")) {
+                googleQuery = googleQuery + " 咖啡廳";
+            }
+
+            ArrayList<WebPage> pages = googleService.searchAndCreatePages(googleQuery);
+
+            if (pages == null) {
+                System.out.println("[HybridSearch] Google-only searchAndCreatePages returned null");
+                return results;
+            }
+
+            System.out.println("[HybridSearch] Google-only raw pages count: " + pages.size());
+            for (int i = 0; i < Math.min(8, pages.size()); i++) {
+                WebPage p = pages.get(i);
+                System.out.println("[HybridSearch] google-only sample[" + i + "] url=" + p.getUrl() + " name=" + p.getName() + " contentLen=" + (p.getContent() == null ? 0 : p.getContent().length()));
+            }
+
+            pages = googleService.filterValidWebPages(pages);
+
+            System.out.println("[HybridSearch] Google-only after filterValidWebPages count: " + (pages == null ? 0 : pages.size()));
+
+            if (pages == null || pages.isEmpty()) {
+                System.out.println("[HybridSearch] Google-only 取得頁面但無有效內容");
+                return results;
+            }
+
+            List<String> allKeywords = keywordService.getAllKeywordsName();
+            ArrayList<SearchResult> ranked = rankingService.rankWebPages(pages, allKeywords);
+
+            for (SearchResult r : ranked) {
+                r.setSource("google");
+                r.setGoogleResult(true);
+            }
+
+            results.addAll(ranked);
+
+            // 排序
+            results.sort((a, b) -> Double.compare(b.getScore(), a.getScore()));
+
+        } catch (Exception e) {
+            System.err.println("[HybridSearch] Google-only 搜尋失敗: " + e.getMessage());
+        }
+
         return results;
     }
     
