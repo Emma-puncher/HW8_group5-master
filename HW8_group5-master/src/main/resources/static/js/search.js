@@ -379,9 +379,9 @@ async function performSearch() {
         
         if (!relevanceResult.isRelevant) {
             // 不相關的搜尋詞 - 顯示警告提示
+            // 顯示警告但仍繼續執行搜尋（讓後端或使用者選擇結果）
             showRelevanceWarning(query, relevanceResult);
-            hideLoading();
-            return;
+            // note: do NOT return here; proceed with search so Google-only requests complete immediately
         }
 
         // 取得篩選參數

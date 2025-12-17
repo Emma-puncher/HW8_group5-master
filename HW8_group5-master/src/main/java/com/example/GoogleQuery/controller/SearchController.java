@@ -67,13 +67,17 @@ public class SearchController {
             response.put("relevance", relevanceResult.isRelevant());
             response.put("message", relevanceResult.getMessage());
 
-            // 如果搜尋詞不相關，提供建議但仍然返回結果（讓使用者決定）
+            // 如果搜尋詞不相關，提供建議
             if (!relevanceResult.isRelevant()) {
                 response.put("warning", true);
                 response.put("suggestions", relevanceResult.getSuggestions());
-                response.put("results", new ArrayList<>()); // 返回空結果
-                response.put("total", 0);
-                return ResponseEntity.ok(response);
+                // 如果前端沒有要求 Google 結果，則直接返回空結果
+                if (!google) {
+                    response.put("results", new ArrayList<>()); // 返回空結果
+                    response.put("total", 0);
+                    return ResponseEntity.ok(response);
+                }
+                // 否則（google=true）繼續執行 Google-only 搜尋
             }
 
             // 呼叫搜尋服務：若前端要求 Google 結果則使用僅 Google 的搜尋路徑
